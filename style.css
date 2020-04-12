@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;600&display=swap');
+
+:root {
+  --primary-color: #5fbaa7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background-color: #f4f4f4;
+  margin: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-weight: 600;
+  text-shadow: 0;
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.money-image {
+  width: 150px;
+  padding-top: 50px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+.currency-container {
+  padding: 20px 0;
+  align-items: center;
+}
+.currency-container select,
+.currency-container input {
+  border: 1px solid #dedede;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+.currency-container input:disabled {
+  background-color: transparent;
+}
+.rate {
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  text-align: left;
+  min-height: 60px;
+}
+.rate.error {
+  color: red;
+  font-weight: bold;
+}
+
+.controls-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.btn {
+  color: white;
+  width: 40%;
+  background-color: var(--primary-color);
+  border: 0;
+  cursor: pointer;
+  padding: 5px 0;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
+
+select:focus,
+input:focus,
+button:focus {
+  outline: 0;
+}
+
+@media (max-width: 600px) {
+  .currency-container select,
+  .currency-container input {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
