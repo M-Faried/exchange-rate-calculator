@@ -13,10 +13,9 @@
     <h1>Exchange Rate Calculator</h1>
     <p>Choose the currency and the ammount to get the exchage rate</p>
 
-
     <div class="container">
 
-        <div class="currency">
+        <div class="currency-container">
             <select id="currency-one">
                 <option value="AED">AED</option>
                 <option value="ARS">ARS</option>
@@ -74,12 +73,7 @@
             <input type="number" id="ammount-one" placeholder="0" value="1">
         </div>
 
-        <div class="swap-rate-container">
-            <button class="btn" id="rate">Swap</button>
-            <div class="rate" id="rate">Here is some text</div>
-        </div>
-
-        <div class="currency">
+        <div class="currency-container">
             <select id="currency-two">
                 <option value="AED">AED</option>
                 <option value="ARS">ARS</option>
@@ -134,11 +128,16 @@
                 <option value="VND">VND</option>
                 <option value="ZAR">ZAR</option>
             </select>
-            <input type="number" id="ammount-two" placeholder="0">
+            <input type="number" id="ammount-two" class="inactive" placeholder="To Be Calculated..." disabled>
         </div>
 
-    </div>
+        <div class="rate" id="rate"></div>
 
+        <div class="controls-container">
+            <button class="btn" id="calculate">Calculate</button>
+            <button class="btn" id="swap">Swap</button>
+        </div>
+    </div>
 
     <script src="./script.js"></script>
 </body>
