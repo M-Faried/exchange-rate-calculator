@@ -7,8 +7,8 @@ const ammountOne = document.getElementById('ammount-one');
 const selectCurrencyTwo = document.getElementById('currency-two');
 const ammountTwo = document.getElementById('ammount-two');
 
-const btnSwap = document.getElementById('swap');
 const rate = document.getElementById('rate');
+const btnSwap = document.getElementById('swap');
 const btnCalc = document.getElementById('calculate');
 
 /////////////////////////////////////////////////////////////// Load Methods
@@ -104,6 +104,6 @@ function displayError(error, message) {
 //Clears the output results.
 function clearResult() {
   ammountTwo.value = null;
-  ammountTwo.placeholder = 'To Be Calculated...';
+  ammountTwo.placeholder = '0...';
   rate.innerHTML = '';
 }

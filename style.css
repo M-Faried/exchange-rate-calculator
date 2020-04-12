@@ -11,7 +11,7 @@
 body {
   font-family: 'Cairo', sans-serif;
   background-color: #f4f4f4;
-  margin: 20px;
+  margin: 0;
 
   display: flex;
   flex-direction: column;
@@ -34,14 +34,12 @@ p {
 
 .money-image {
   width: 150px;
-  padding-top: 50px;
 }
 
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 50px;
 }
 
 .currency-container {
@@ -77,13 +75,13 @@ p {
 }
 .btn {
   color: white;
-  width: 40%;
+  width: 45%;
   background-color: var(--primary-color);
   border: 0;
   cursor: pointer;
-  padding: 5px 0;
+  padding: 5px 5px;
   border-radius: 5px;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 select:focus,
@@ -97,5 +95,13 @@ button:focus {
   .currency-container input {
     width: 100%;
     margin: 5px 0;
+  }
+
+  .controls-container {
+    margin-bottom: 10px;
+  }
+
+  body {
+    padding-top: 10px;
   }
 }
