@@ -25,11 +25,13 @@ btnCalc.addEventListener('click', calculate);
 
 /////////////////////////////////////////////////////////////// Helper Functions
 
-//Loads data that may be saved into the local storage.
+/**
+ * Loads data that may be saved into the local storage.
+ */
 function loadSavedData() {
   const stored_currency_one = localStorage.getItem('curr_one');
   const stored_currency_two = localStorage.getItem('curr_two');
-  const stored_inpt_ammount = localStorage.getItem('ammount');
+  const stored_input_ammount = localStorage.getItem('ammount');
 
   if (stored_currency_one !== null)
     selectCurrencyOne.value = stored_currency_one;
@@ -37,50 +39,28 @@ function loadSavedData() {
   if (stored_currency_two !== null)
     selectCurrencyTwo.value = stored_currency_two;
 
-  if (stored_inpt_ammount !== null) ammountOne.value = stored_inpt_ammount;
+  if (stored_input_ammount !== null) ammountOne.value = stored_input_ammount;
 
   if (
     stored_currency_one !== null &&
     stored_currency_two !== null &&
-    stored_inpt_ammount !== null
+    stored_input_ammount !== null
   )
     calculate();
 }
 
-//Saved the current inputs to the local storage.
+/**
+ * Saves the current user inputs to the local storage.
+ */
 function saveData() {
   localStorage.setItem('curr_one', selectCurrencyOne.value);
   localStorage.setItem('curr_two', selectCurrencyTwo.value);
   localStorage.setItem('ammount', ammountOne.value);
 }
 
-//Fetch the exchange rates from the API and updates the dom.
-function calculate() {
-  const currency_one = selectCurrencyOne.value;
-  const currency_two = selectCurrencyTwo.value;
-
-  fetch(`${apiHttpReq}${currency_one}`)
-    .then((res) => res.json())
-    .then((data) => {
-      //console.log(data);
-      if (data.result === 'success') {
-        //Clearing any previous errors
-        displayError(false);
-
-        const rateValue = +data.conversion_rates[currency_two];
-        rate.innerText = `1 ${currency_one} = ${rateValue} ${currency_two}`;
-        ammountTwo.value = (rateValue * +ammountOne.value).toFixed(3);
-
-        //Saving data
-        saveData();
-      } else {
-        displayError(true, 'API is not responding.');
-      }
-    })
-    .catch((error) => displayError(true, 'Network Failure.'));
-}
-
-//Swaps the exchange fields of the currency.
+/**
+ * Swaps selected currencies.
+ */
 function swapFields() {
   const currency_one = selectCurrencyOne.value;
   const currency_two = selectCurrencyTwo.value;
@@ -91,19 +71,53 @@ function swapFields() {
   calculate();
 }
 
-// Displays the error message in case of the network failure.
-function displayError(error, message) {
+/**
+ * Fetches the exchange rates from the API and updates the dom with converterd ammount.
+ */
+function calculate() {
+  const currency_one = selectCurrencyOne.value;
+  const currency_two = selectCurrencyTwo.value;
+
+  fetch(`${apiHttpReq}${currency_one}`)
+    .then((res) => res.json())
+    .then((data) => {
+      //console.log(data);
+      if (data.result === 'success') {
+        //Clearing any previous errors
+        setError(false);
+
+        const rateValue = +data.conversion_rates[currency_two];
+        rate.innerText = `1 ${currency_one} = ${rateValue} ${currency_two}`;
+        ammountTwo.value = (rateValue * +ammountOne.value).toFixed(3);
+
+        //Saving user selected data.
+        saveData();
+      } else {
+        setError(true, 'API is not responding.');
+      }
+    })
+    .catch((error) => setError(true, 'Network Failure.'));
+}
+
+/**
+ * Clears the output results when the user makes a change
+ */
+function clearResult() {
+  ammountTwo.value = null;
+  ammountTwo.placeholder = '0...';
+  rate.innerHTML = '';
+}
+
+/**
+ * Clears or displays the error message format and text.
+ * @param {Boolean} error A flag indicates whether the error should be cleared or not.
+ * @param {String} message The error message to be printed in case of error flag is true.
+ */
+function setError(error, message) {
   if (error) {
     rate.classList.add('error');
     rate.innerHTML = 'Failed to get exchange rates. ' + message;
   } else {
     rate.classList.remove('error');
   }
-}
-
-//Clears the output results.
-function clearResult() {
-  ammountTwo.value = null;
-  ammountTwo.placeholder = '0...';
-  rate.innerHTML = '';
 }
